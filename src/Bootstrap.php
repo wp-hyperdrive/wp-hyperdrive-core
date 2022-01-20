@@ -13,12 +13,26 @@ class Bootstrap
      */
     public static function load(): void
     {
-        foreach (apply_filters('wp_hyperdrive_services', []) as $service) {
+        foreach (self::getServices() as $service) {
             $instance = new $service();
             if (!$instance instanceof Registerable) {
                 continue;
             }
             $instance->register();
         }
+    }
+
+    /**
+     * @return Registerable[]
+     */
+    private static function getServices(): array
+    {
+        $services = [];
+
+        if (class_exists(\Hyperdrive\AdminPages\Bootstrap::class)) {
+            $services[] = \Hyperdrive\AdminPages\Bootstrap::class;
+        }
+
+        return apply_filters('wp_hyperdrive_services', $services);
     }
 }
