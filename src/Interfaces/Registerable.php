@@ -2,7 +2,7 @@
 
 namespace Hyperdrive\Core\Interfaces;
 
-defined('ABSPATH') or die('That\'s not how the Force works!');
+defined('ABSPATH') || exit('That\'s not how the Force works!');
 
 interface Registerable
 {
